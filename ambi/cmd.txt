@@ -1,0 +1,49 @@
+composer create-project laravel/laravel:^10.0 PMScart
+
+composer require laravel/breeze --dev
+
+php artisan breeze:install
+
+npm install
+
+composer require spatie/laravel-permission
+
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+
+============================> add to Kernel.php(app/http/Kernel.php) <=============================
+protected $middlewareAliases = [
+    ....
+    'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
+    'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
+    'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
+]
+
+php artisan make:model Product -m
+
+php artisan make:controller RoleController -r
+php artisan make:controller UserController -r
+php artisan make:controller ProductController -r
+
+
+===================================>postcss.config.js<==================================================================
+Rename postcss.config.js to postcss.config.cjs (keep tailwind.config.js as it is)
+Change the content of postcss.config.cjs as follows:
+module.exports = ({ env }) => ({ plugins: [ require('tailwindcss')(), require('autoprefixer')() ] })
+
+
+
+=====================================>codesniffer<======================================================================
+vendor\bin\phpcs 
+vendor\bin\phpcbf  
+
+=========================================>JWT auth<======================================================================
+jwt-auth secret [yrxOXmzLpalOFAIV1slE1bPaeqHjVtfDHdGfPtOOcje3EFJIyHM1HeX1N8ZffYnw] set successfully.
+
+
+======================================================><=============================================================================
+
+Publishable key => pk_test_51P4y7sSDPV534rQOSU0puuMHu4TEDYOUHKrrkIIoqh1jMAlqQmTDGxiXYteXfRfeZcyqG6IVZwV862p6MGRqqZdN00vGyn0Kua
+
+Secret key => sk_test_51P4y7sSDPV534rQOaflcjYwBwZq2aJSH2A6X68G1UiZQ3jxj2B0RcqrZL0e6MVSBNQdkHWmoWBjNFBP3Wj3DfyhU000pFZOAou
+
+=======================================================
